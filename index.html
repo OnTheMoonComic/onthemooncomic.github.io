@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>On The Moon Comic</title>
+    <style media="screen">
+      .header{
+        align:center;
+        font-family: monospace;
+        font-size: 150%;
+        text-align: center;
+        border-bottom-width: 2px;
+        border-bottom-color: black;
+        border-bottom-style: solid;
+        margin-bottom:2vh;
+      }
+      .comic-content{
+        width:100%;
+      }
+      .comic-image{
+        display:block;
+        margin-left:auto;
+        margin-right:auto;
+        align-self: center;
+      }
+    </style>
+    <script type="text/javascript">
+      function load(){
+        console.log("test");
+        var comic = document.createElement('div');
+        comic.setAttribute("class", "comic-content");
+        document.body.appendChild(comic);
+
+        var index = 1;
+        var tempImg = new Image();
+        tempImg.onload = function(){
+         appendImage();
+        }
+        var tryLoadImage = function( index ){
+          try{
+            tempImg.src = 'chapters/ch1/Page' + index + '.png';
+          }
+          catch(err){
+            console.log("Reached the end of the chapter folder");
+          }
+        }
+        var appendImage = function(){
+         var img = document.createElement('img');
+         img.src = tempImg.src;
+         img.setAttribute("class", "comic-image");
+         comic.appendChild( img )
+         tryLoadImage( index++ )
+        }
+        tryLoadImage( index++ );
+      }
+    </script>
+  </head>
+  <body onload="load()">
+      <div class="header">
+          <a class="header-button" href="">Home</a>
+          <a class="header-button" href="">Chapters(Doesn't work)</a>
+          <a class="header-button" href="">About(Doesn't work)</a>
+      </div>
+  </body>
+</html>
